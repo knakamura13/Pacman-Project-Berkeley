@@ -18,6 +18,7 @@ import random, util
 
 from game import Agent
 
+
 class ReflexAgent(Agent):
     """
       A reflex agent chooses an action at each choice point by examining
@@ -28,7 +29,7 @@ class ReflexAgent(Agent):
       headers.
     """
 
-
+    
     def getAction(self, gameState):
         """
         You do not need to change this method, but you're welcome to.
@@ -40,6 +41,9 @@ class ReflexAgent(Agent):
         """
         # Collect legal moves and successor states
         legalMoves = gameState.getLegalActions()
+        for move in legalMoves:
+          if move == 'Stop':
+            legalMoves.remove(move)
 
         # Choose one of the best actions
         scores = [self.evaluationFunction(gameState, action) for action in legalMoves]
@@ -48,7 +52,6 @@ class ReflexAgent(Agent):
         chosenIndex = random.choice(bestIndices) # Pick randomly among the best
 
         "Add more of your code here if you want to"
-
         return legalMoves[chosenIndex]
 
     def evaluationFunction(self, currentGameState, action):
@@ -74,6 +77,12 @@ class ReflexAgent(Agent):
         newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
 
         "*** YOUR CODE HERE ***"
+        # print str(ghostState.configuration.getPosition()[0]) + ", " + str(ghostState.configuration.getPosition()[1])
+        # for ghost in newGhostStates:
+        #   print str(ghost.configuration.getPosition()[0]) + ", " + str(ghost.configuration.getPosition()[1])
+        # print ""
+        # print newFood
+
         return successorGameState.getScore()
 
 def scoreEvaluationFunction(currentGameState):
