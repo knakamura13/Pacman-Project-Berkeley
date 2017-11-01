@@ -15,9 +15,9 @@
 from util import manhattanDistance
 from game import Directions
 import random, util
+import inspect
 
 from game import Agent
-
 
 class ReflexAgent(Agent):
     """
@@ -80,8 +80,14 @@ class ReflexAgent(Agent):
         # print str(ghostState.configuration.getPosition()[0]) + ", " + str(ghostState.configuration.getPosition()[1])
         # for ghost in newGhostStates:
         #   print str(ghost.configuration.getPosition()[0]) + ", " + str(ghost.configuration.getPosition()[1])
-        # print ""
-        # print newFood
+        # print newFood 
+
+        currX = newPos[0]
+        currY = newPos[1]
+        # print currX, currY
+        currentFood = currentGameState.getFood()
+        if currentFood[currX][currY]:
+          return 999
 
         return successorGameState.getScore()
 
